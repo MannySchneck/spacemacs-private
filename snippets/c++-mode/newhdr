@@ -1,0 +1,10 @@
+# key: newhdr
+# name: newhdr
+# --
+/**
+ * Copyright 2017 PhenixP2P Inc. Confidential and Proprietary. All rights reserved.
+ */
+#ifndef ${1: `(upcase (replace-regexp-in-string "/" "_" (string-remove-prefix (projectile-project-root) (file-name-sans-extension (buffer-file-name)))))`_H_}
+#define $1
+$0
+#endif // $1

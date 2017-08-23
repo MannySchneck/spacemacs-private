@@ -1,0 +1,7 @@
+# name : phenix header guard
+# key: incg
+# --
+#ifndef ${1: `(upcase (replace-regexp-in-string "/" "_" (string-remove-prefix (projectile-project-root) (file-name-sans-extension (buffer-file-name)))))`_H_}
+#define $1
+$0
+#endif // $1
