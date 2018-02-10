@@ -76,6 +76,7 @@ Each entry is either:
 
 (defun cquery/init-company-lsp ()
   (use-package company-lsp
+    :after lsp-mode
     :config
     (progn
       (setq company-lsp-async t
@@ -84,16 +85,17 @@ Each entry is either:
       (push 'company-lsp company-backends-c-mode-common)
       )))
 
-;; (defun cquery/init-markdown-mode ()
-;;   (use-package markdown-mode)
-;;   )
+(defun cquery/init-markdown-mode ()
+  (use-package markdown-mode)
+  :after lsp-mode
+  )
 
 (defun cquery/init-lsp-ui ()
   (use-package lsp-ui
     :after lsp-mode
-    ;; :after markdown-mode
+    :after markdown-mode
     :config
-    (add-hook 'lsp-after-open-hook 'lsp-ui-mode)
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
     ))
 
 ;; (defun cquery/init-helm-xref ()
@@ -114,7 +116,7 @@ Each entry is either:
     :init
     (progn
       (setq cquery-executable "/home/manny/source/cquery/build/release/bin/cquery")
-      ;(setq cquery-extra-init-params '(:index (comments 2) :cacheformat "msgpack"))
+      ;; (setq cquery-extra-init-params '(:index (comments 2) :cacheformat "msgpack"))
       (spacemacs/add-to-hooks #'lsp-cquery-enable '(c-mode-hook c++-mode-hook))
       (dolist (mode '(c-mode c++-mode))
         (evil-leader/set-key-for-mode mode
@@ -123,7 +125,8 @@ Each entry is either:
           "r[" 'lsp-ui-peek-jump-backward
           "r]" 'lsp-ui-peek-jump-forward
           "rl" 'helm-imenu
-          )))))
+          ))
+      )))
 
 
 
